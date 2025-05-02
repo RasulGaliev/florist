@@ -1,0 +1,8 @@
+{
+    "events": {
+      "restart": "osascript -e 'display notification \"App restarted\" with title \"Nodemon\"'"
+    },
+    "verbose": true,
+    "ignore": ["node_modules/"],
+    "delay": 1000
+  }
