@@ -1,0 +1,26 @@
+<div class="container">
+    <h1>Каталог товаров</h1>
+
+    <div class="category-filter">
+        <button *ngFor="let category of categories" [class.active]="category === selectedCategory"
+            (click)="selectCategory(category)">
+            {{ category }}
+        </button>
+    </div>
+
+    <div class="product-grid">
+        <div *ngFor="let product of filteredProducts" class="product-card">
+            <div class="image-container">
+                <img [src]="product.imageUrl" [alt]="product.name">
+                <div class="stock-badge" *ngIf="product.inStock">В наличии</div>
+            </div>
+
+            <div class="product-info">
+                <h3>{{ product.name }}</h3>
+                <p class="description">{{ product.description }}</p>
+                <div class="price">{{ product.price | currency:'RUB':'symbol-narrow':'1.0-0' }} ₽</div>
+                <button class="add-to-cart">Добавить в корзину</button>
+            </div>
+        </div>
+    </div>
+</div>

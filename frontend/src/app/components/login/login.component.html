@@ -1,0 +1,50 @@
+<!-- login.component.html -->
+<div class="login-container">
+    <div class="login-card">
+        <h2>Вход в личный кабинет</h2>
+
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="email">Email</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-envelope"></i>
+                    <input type="email" id="email" formControlName="email" placeholder="example@mail.com"
+                        [ngClass]="{ 'error': submitted && f['email'].errors }">
+                </div>
+                <div *ngIf="submitted && f['email'].errors" class="error-message">
+                    <span *ngIf="f['email'].errors['required']">Обязательное поле</span>
+                    <span *ngIf="f['email'].errors['email']">Некорректный email</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Пароль</label>
+                <div class="input-with-icon">
+                    <i class="fas fa-lock"></i>
+                    <input type="password" id="password" formControlName="password" placeholder="••••••••"
+                        [ngClass]="{ 'error': submitted && f['password'].errors }">
+                </div>
+                <div *ngIf="submitted && f['password'].errors" class="error-message">
+                    <span *ngIf="f['password'].errors['required']">Обязательное поле</span>
+                    <span *ngIf="f['password'].errors['minlength']">
+                        Минимум 6 символов
+                    </span>
+                </div>
+            </div>
+
+            <button type="submit" class="btn" [disabled]="loading">
+                <span *ngIf="!loading">Войти</span>
+                <span *ngIf="loading"><i class="fas fa-spinner fa-spin"></i></span>
+            </button>
+
+            <div class="links">
+                <a routerLink="/forgot-password">Забыли пароль?</a>
+                <a routerLink="/register">Создать аккаунт</a>
+            </div>
+        </form>
+
+        <div *ngIf="error" class="server-error">
+            {{ error }}
+        </div>
+    </div>
+</div>

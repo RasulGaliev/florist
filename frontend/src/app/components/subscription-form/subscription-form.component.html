@@ -1,0 +1,66 @@
+<form [formGroup]="subscriptionForm" (ngSubmit)="onSubmit()">
+    <h2>Оформление подписки</h2>
+
+    <div class="form-section">
+        <h3>Выберите тариф</h3>
+        <div class="plan-options">
+            <label *ngFor="let plan of plans" class="plan-card">
+                <input type="radio" formControlName="plan" [value]="plan.value">
+                <div class="plan-content">
+                    <span class="plan-title">{{ plan.label }}</span>
+                    <span class="plan-price">{{ plan.price }}</span>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Данные получателя</h3>
+        <div class="form-row">
+            <div class="input-group">
+                <label>Имя получателя</label>
+                <input type="text" formControlName="recipient.name">
+            </div>
+            <div class="input-group">
+                <label>Email</label>
+                <input type="email" formControlName="recipient.email">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Адрес доставки</h3>
+        <div class="form-row">
+            <div class="input-group">
+                <label>Улица и дом</label>
+                <input type="text" formControlName="address.street">
+            </div>
+            <div class="input-group">
+                <label>Город</label>
+                <input type="text" formControlName="address.city">
+            </div>
+        </div>
+    </div>
+
+    <div class="form-section">
+        <h3>Платежные данные</h3>
+        <div class="form-row">
+            <div class="input-group">
+                <label>Номер карты</label>
+                <input type="text" formControlName="payment.cardNumber" placeholder="0000 0000 0000 0000">
+            </div>
+            <div class="form-row">
+                <div class="input-group">
+                    <label>Срок действия</label>
+                    <input type="text" formControlName="payment.expiry" placeholder="MM/YY">
+                </div>
+                <div class="input-group">
+                    <label>CVV</label>
+                    <input type="text" formControlName="payment.cvv" placeholder="123">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" [disabled]="subscriptionForm.invalid">Оформить подписку</button>
+</form>
